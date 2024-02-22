@@ -1,15 +1,42 @@
-import React from 'react'
-import {Text, TextInput, Image, Button, View} from 'react-native'
+import React from "react";
+import { Text, TextInput, Image, Button, View, Pressable } from "react-native";
 
 const Page1 = () => {
   return (
     <>
-    <View  style={{flex:1, flexDirection:'row', alignItems:'center', marginLeft:150}}>
-    <Button title="M" color="#ffd700" style={{fontSize:20, fontWeight:'bold'}} ></Button>
-    <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Muvi</Text>
-  </View>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          alignItems: "center",
+          margin: 150,
+        }}
+      >
+        <Pressable
+          style={{
+            backgroundColor: "yellow",
+            height: 70,
+            width: 70,
+            borderRadius: 8,
+          }}
+        >
+          <Text
+            style={{
+              padding: 5,
+              color: "black",
+              fontSize: 60,
+              fontWeight: "bold",
+            }}
+          >
+            M
+          </Text>
+        </Pressable>
+        <Pressable style={{ height: 70, width: 139, borderRadius: 8 }}>
+          <Text style={{ padding: 5, color: "white", fontSize: 60 }}>Muvi</Text>
+        </Pressable>
+      </View>
     </>
-  )
-}
+  );
+};
 
-export default Page1
+export default Page1;

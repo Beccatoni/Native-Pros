@@ -4,6 +4,7 @@ import Cat from './components/Cat'
 import Page1 from './screens/Page1';
 import Page2 from './screens/Page2';
 import Page3 from './screens/Page3';
+import Page4 from './screens/Page4';
 
 export default function App() {
   return (
@@ -33,10 +34,11 @@ export default function App() {
 
         <Cat name='Max' fname='Becca' sName='Jane' />
     </ScrollView> */}
-<View style={{flex:1, backgroundColor:'#4f4f4f'}}>
+<View style={{flex:1, backgroundColor:'black'}}>
     {/* <Page1/> */}
-    <Page2/>
+    {/* <Page2/> */}
     {/* <Page3/> */}
+    <Page4/>
 
 </View>
 
