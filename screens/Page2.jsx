@@ -1,9 +1,15 @@
 import React from "react";
-import { Button, ImageBackground, Text, View, Pressable } from "react-native";
+import { Button, ImageBackground, Text, View, Pressable, Image } from "react-native";
 import { Feather } from "@expo/vector-icons";
-
+import {useNavigation} from '@react-navigation/native'
 const Page2 = () => {
   const image = { uri: "https://legacy.reactjs.org/logo-og.png" };
+
+const navigation = useNavigation()
+
+const handlePress = ( ) => {
+  navigation.navigate('Page3')
+}
   return (
     <>
       <ImageBackground
@@ -62,6 +68,7 @@ const Page2 = () => {
         </View>
         <View style={{ alignItems: "baseline" }}>
           <Pressable
+           onPress={handlePress}
             style={{
               backgroundColor: "yellow",
               height: 30,

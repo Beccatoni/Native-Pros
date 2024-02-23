@@ -1,23 +1,30 @@
 import React from "react";
 import { Button, Text, View, Image, Pressable, StyleSheet, Dimensions } from "react-native";
+import {useNavigation} from '@react-navigation/native'
 
 const width = Dimensions.get('window').width;
 
 const Page3 = () => {
+  const navigation = useNavigation()
+
+const handlePress = ( ) => {
+  navigation.navigate('Page4')
+}
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
-        <Pressable style={styles.iconContainer}>
-          <Text style={styles.iconText}>M</Text>
-        </Pressable>
-        <Pressable style={styles.titleContainer}>
-          <Text style={styles.titleText}>Muvi</Text>
-        </Pressable>
+      <Image source={require('../assets/logo.jpg')} />
       </View>
+      <View 
+        style={{backgroundColor:'#26282c',justifyContent: 'center',alignItems: 'center', height: 300, width: 400}}
+        >
       <Image
-        source={require("../assets/tube.jpg")}
-        style={styles.image}
+        source={require("../assets/tube.jpg")}  
+        resizeMethod="cover"    
+
       />
+      </View>
+      
       <View style={styles.textContainer}>
         <Text style={styles.headerText}>Welcome To MUVI</Text>
         <Text style={styles.descriptionText}>
@@ -26,10 +33,10 @@ const Page3 = () => {
         </Text>
       </View>
       <View style={styles.buttonContainer}>
-        <Pressable style={styles.button}>
+        <Pressable onPress={handlePress} style={styles.button}>
           <Text style={styles.buttonText}>Watch Movie</Text>
         </Pressable>
-        <Pressable style={styles.signInButton}>
+        <Pressable onPress={handlePress} style={styles.signInButton}>
           <Text style={styles.signInText}>Sign In</Text>
         </Pressable>
       </View>
@@ -44,9 +51,9 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   logoContainer: {
-    paddingBottom: 90,
-    flexDirection: "row",
-    // alignItems: "center",
+    paddingBottoms: 40,
+    paddingTop: 50,
+    alignItems: "center",
     backgroundColor:'black',
     justifyContent:'center',
     height:9,
@@ -79,9 +86,8 @@ const styles = StyleSheet.create({
     marginRight: 0,
   },
   image: {
-    // width: 300,
-    // height: 20,
-    resizeMode: "cover",
+    display:'flex',
+    
     marginBottom: 20,
   },
   textContainer: {

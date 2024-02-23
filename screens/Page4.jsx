@@ -1,22 +1,38 @@
 import React from 'react';
-import { Text, View, Pressable } from 'react-native';
+import { Text, View, TouchableOpacity, Pressable, Dimensions } from 'react-native';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { TextInput, Button } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 const Page4 = () => {
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate('Page5');
+  };
+
+  const handlePress2 = () => {
+    navigation.navigate('Page3');
+  };
+
   return (
-    <>
-      <View></View>
-      <View style={{ backgroundColor: 'black', width: "100%", height: "100%", padding: 25, marginTop: 10 }}>
-        <AntDesign name="arrowleft" size={30} color="yellow" />
+    <View style={{ flex: 1}}>
+      <View style={{ backgroundColor: 'black', padding: 25, height:height }}>
+        <TouchableOpacity onPress={handlePress2}>
+          <AntDesign name="arrowleft" size={30} color="yellow" />
+        </TouchableOpacity>
         <Text style={{ color: 'white', fontSize: 30, fontWeight: 'bold', paddingTop: 20 }}>Create Account</Text>
-        <Text style={{ color: 'white', fontSize: 20, fontWeight: '' }}>Enter information below or login with social account to get started</Text>
+        <Text style={{ color: 'white', fontSize: 20, fontWeight: 'normal', paddingBottom: 20 }}>Enter information below or login with social account to get started</Text>
         <TextInput
           label="Email"
-          mode="outlined"
+          mode="flat"
           style={{ marginTop: 15, backgroundColor: 'black' }}
           theme={{ colors: { primary: 'white', placeholder: 'white', text: 'white', background: 'black' } }}
-          right={<TextInput.Icon name="email" color="yellow" />}
+          right={<TextInput.Icon icon={"email-outline"} color="yellow" />}
         />
         <TextInput
           label="Password"
@@ -30,7 +46,7 @@ const Page4 = () => {
           label="Confirm Password"
           mode="outlined"
           secureTextEntry
-          style={{ marginTop: 15, marginBottom: 15, backgroundColor: 'black' }}
+          style={{ marginTop: 15, backgroundColor: 'black' }}
           theme={{ colors: { primary: 'white', placeholder: 'white', text: 'white', background: 'black' } }}
           right={<TextInput.Icon name="eye" color="yellow" />}
         />
@@ -52,11 +68,11 @@ const Page4 = () => {
             Facebook
           </Button>
         </View>
-        <Pressable style={{ backgroundColor: "yellow", height: 40, width: "100%", borderRadius: 8, marginTop: 10 }}>
-          <Text style={{ textAlign: 'center', padding: 10 }}>Register</Text>
-        </Pressable>
       </View>
-    </>
+      <Pressable onPress={handlePress} style={{ backgroundColor: "yellow", height: 40, width: "100%", borderRadius: 8, marginTop: 'auto', marginBottom: 15 }}>
+        <Text style={{ textAlign: 'center', padding: 10 }}>Register</Text>
+      </Pressable>
+    </View>
   )
 }
 

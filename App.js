@@ -1,10 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import {NavigationContainer}   from "@react-navigation/native"
 import { StyleSheet, Text, View, Image, ScrollView, TextInput, Pressable} from 'react-native'
 import Cat from './components/Cat'
+
+
 import Page1 from './screens/Page1';
 import Page2 from './screens/Page2';
 import Page3 from './screens/Page3';
 import Page4 from './screens/Page4';
+import Page5 from './screens/Page5';
+const  Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
@@ -34,13 +40,22 @@ export default function App() {
 
         <Cat name='Max' fname='Becca' sName='Jane' />
     </ScrollView> */}
-<View style={{flex:1, backgroundColor:'black'}}>
-    {/* <Page1/> */}
-    {/* <Page2/> */}
-    {/* <Page3/> */}
+{/* <View style={{flex:1, backgroundColor:'black'}}>
+    <Page1/>
+    <Page2/>
+    <Page3/>
     <Page4/>
 
-</View>
+</View> */}
+<NavigationContainer>
+  <Stack.Navigator initialRouteName='Page1' screenOptions={{headerShown:false}}>
+  <Stack.Screen name="Page1" component={Page1}  />
+    <Stack.Screen name="Page2" component={Page2}  />
+    <Stack.Screen name="Page3" component={Page3}  />
+    <Stack.Screen name="Page4" component={Page4}  />
+    <Stack.Screen name="Page5" component={Page5} />
+  </Stack.Navigator>
+</NavigationContainer>
 
 </>
 

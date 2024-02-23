@@ -1,7 +1,18 @@
-import React from "react";
-import { Text, TextInput, Image, Button, View, Pressable } from "react-native";
+import React , { useEffect } from "react";
+import { Text, TextInput, Image, Button, View, Pressable, Dimensions } from "react-native";
+import {useNavigation} from "@react-navigation/core"
 
-const Page1 = () => {
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+
+const Page1 = ({}) => {
+  const navigation = useNavigation()
+  useEffect(()=> {
+    setTimeout(()=> {
+      navigation.navigate('Page2')
+    }, 1000)
+  })
   return (
     <>
       <View
@@ -10,30 +21,17 @@ const Page1 = () => {
           flexDirection: "row",
           alignItems: "center",
           margin: 150,
+          width:width,
+          height:height,
+
         }}
       >
-        <Pressable
-          style={{
-            backgroundColor: "yellow",
-            height: 70,
-            width: 70,
-            borderRadius: 8,
-          }}
-        >
-          <Text
-            style={{
-              padding: 5,
-              color: "black",
-              fontSize: 60,
-              fontWeight: "bold",
-            }}
-          >
-            M
-          </Text>
-        </Pressable>
-        <Pressable style={{ height: 70, width: 139, borderRadius: 8 }}>
-          <Text style={{ padding: 5, color: "white", fontSize: 60 }}>Muvi</Text>
-        </Pressable>
+       
+       <View style={{backgroundColor:'black', width:'100%', height:'100%',justifyContent:'center',alignItems:'center'}}>
+    <View >
+ <Image source={require('../assets/logo.jpg')} />
+</View>
+</View>
       </View>
     </>
   );
