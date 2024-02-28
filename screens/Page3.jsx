@@ -16,11 +16,10 @@ const handlePress = ( ) => {
       <Image source={require('../assets/logo.jpg')} />
       </View>
       <View 
-        style={{backgroundColor:'#26282c',justifyContent: 'center',alignItems: 'center', height: 300, width: 400}}
+        style={{justifyContent: 'center',alignItems: 'center', height: 300, width: 400}}
         >
       <Image
-        source={require("../assets/tube.jpg")}  
-        resizeMethod="cover"    
+        source={require("../assets/tube.jpg")}     
 
       />
       </View>
@@ -28,8 +27,7 @@ const handlePress = ( ) => {
       <View style={styles.textContainer}>
         <Text style={styles.headerText}>Welcome To MUVI</Text>
         <Text style={styles.descriptionText}>
-          Browse Through our collections and discover hundreds of movies and
-          series that you'll love!
+          Free movie streaming all your needs everytime and everywhere.
         </Text>
       </View>
       <View style={styles.buttonContainer}>
@@ -46,9 +44,9 @@ const handlePress = ( ) => {
 
 const styles = StyleSheet.create({
   container: {
-
-    backgroundColor: "#1F2123",
+    backgroundColor:'#26282C',
     height: "100%",
+    gap:40
   },
   logoContainer: {
     paddingBottoms: 40,
@@ -56,22 +54,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor:'black',
     justifyContent:'center',
-    height:9,
-    width:width,
-    
-  },
-  iconContainer: {
-    backgroundColor: "yellow",
-    height: 45,
-    width: 75,
-    borderRadius: 8,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  iconText: {
-    color: "black",
-    fontSize: 30,
-    fontWeight: "bold",
+    height:110,
+    width:width
   },
   titleContainer: {
     height: 70,
@@ -84,11 +68,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 40,
     marginRight: 0,
-  },
-  image: {
-    display:'flex',
-    
-    marginBottom: 20,
   },
   textContainer: {
     alignItems: "center",
@@ -103,6 +82,7 @@ const styles = StyleSheet.create({
   descriptionText: {
     color: "white",
     textAlign: "center",
+    fontSize:17
   },
   buttonContainer: {
     alignItems: "center",

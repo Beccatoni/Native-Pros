@@ -1,89 +1,99 @@
 import React from "react";
-import { Button, ImageBackground, Text, View, Pressable, Image } from "react-native";
-import { Feather } from "@expo/vector-icons";
-import {useNavigation} from '@react-navigation/native'
+import { Text, View, Pressable, ImageBackground, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { width } from "./Page5";
+
 const Page2 = () => {
-  const image = { uri: "https://legacy.reactjs.org/logo-og.png" };
+  const navigation = useNavigation();
 
-const navigation = useNavigation()
+  const handlePress = () => {
+    navigation.navigate("Page3");
+  };
 
-const handlePress = ( ) => {
-  navigation.navigate('Page3')
-}
   return (
-    <>
-      <ImageBackground
-        source={require("../assets/joker.png")}
-        style={{
-          flex: 1,
-          justifyContent: "space-between",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          alignItems: "center",
-          opacity: 0.6,
-          width: "100%",
-          height: "100%",
-        }}
-        resizeMode="cover"
-      >
-        <View style={{ flex: 1, alignItems: "center", justifyContent:"center", paddingTop:30, backgroundColor: "rgba(0, 0, 0, 0.3)", widht:'100%', height:'100%'}}>
-          <Text style={{ color: "white", fontWeight: "normal", fontSize: 30 }}>
-            Enjoy your favorite movie everywhere
-          </Text>
-          <Text style={{ color: "white" }}>
-            Browse Through our collections and discover hundreds of movies and
-            series that you'll love!
-          </Text>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              gap: 2,
-            }}
-          >
-            <View
-              style={{
-                backgroundColor: "yellow",
-                height: 10,
-                width: 50,
-                borderRadius: 10,
-              }}
-            ></View>
-            <View
-              style={{
-                backgroundColor: "white",
-                height: 10,
-                width: 20,
-                borderRadius: 10,
-              }}
-            ></View>
-            <View
-              style={{
-                backgroundColor: "white",
-                height: 10,
-                width: 20,
-                borderRadius: 10,
-              }}
-            ></View>
-          </View>
+    <ImageBackground
+      source={require("../assets/joker.png")}
+      style={styles.container}
+      resizeMode="cover"
+    >
+      <View style={styles.content}>
+        <Text style={styles.title}>
+          Enjoy your favorite movie everywhere
+        </Text>
+        <Text style={styles.subtitle}>
+          Browse through our collections and discover hundreds of movies and series that you'll love!
+        </Text>
+        <View style={styles.progressBar}>
+          <View style={styles.progressBarItemYellow} />
+          <View style={styles.progressBarItemWhite} />
+          <View style={styles.progressBarItemWhite} />
         </View>
-        <View style={{ alignItems: "baseline" }}>
-          <Pressable
-           onPress={handlePress}
-            style={{
-              backgroundColor: "yellow",
-              height: 30,
-              width: 300,
-              paddingLeft: 95,
-              borderRadius: 8,
-              marginBottom:15,
-            }}
-          >
-            <Text style={{ paddingTop: 5 }}>Get Started</Text>
-          </Pressable>
-        </View>
-      </ImageBackground>
-    </>
+      </View>
+      <Pressable onPress={handlePress} style={styles.button}>
+        <Text style={styles.buttonText}>Get Started</Text>
+      </Pressable>
+    </ImageBackground>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: "space-between",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    width: width,
+    height: "100%",
+  },
+  content: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 30,
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    paddingHorizontal: 20,
+  },
+  title: {
+    color: "white",
+    fontWeight: "normal",
+    fontSize: 30,
+    marginBottom: 10,
+    textAlign: "center",
+  },
+  subtitle: {
+    color: "white",
+    textAlign: "center",
+  },
+  progressBar: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginVertical: 10,
+    alignSelf:"flex-start",
+    gap:3
+  },
+  progressBarItemYellow: {
+    backgroundColor: "yellow",
+    height: 10,
+    width: 50,
+    borderRadius: 10,
+  },
+  progressBarItemWhite: {
+    backgroundColor: "white",
+    height: 10,
+    width: 20,
+    borderRadius: 10,
+  },
+  button: {
+    backgroundColor: "yellow",
+    height: 50,
+    width: 380,
+    borderRadius: 8,
+    alignSelf: "center",
+    marginBottom: 15,
+    justifyContent: "center",
+  },
+  buttonText: {
+    textAlign: "center",
+    fontSize: 16,
+  },
+});
 
 export default Page2;
