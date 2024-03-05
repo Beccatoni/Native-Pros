@@ -124,7 +124,7 @@ export default function Page7()  {
           </View>
         </View>
       <View style={{marginBottom:"3%", marginTop:"10%" }}>
-        <ScrollView horizontal contentContainerStyle={{gap:50}}>
+        <ScrollView horizontal contentContainerStyle={{gap:50}} showsHorizontalScrollIndicator={false}>
           
           <Text style={{ color: "#E9AB17", fontWeight: "normal" }}>Featured</Text>
           <Text style={{ color: "white", fontWeight: "normal" }}>Series</Text>
@@ -141,7 +141,9 @@ export default function Page7()  {
             gap: 20,
             justifyContent: "space-between",
             marginBottom: 10,
+            
           }}
+          showsHorizontalScrollIndicator={false}
         >
           <TouchableOpacity
             style={{
@@ -270,6 +272,7 @@ export default function Page7()  {
             )}
             style={{ gap: 15 }}
             horizontal
+            showsHorizontalScrollIndicator={false}
           />
         </View>
         <View>

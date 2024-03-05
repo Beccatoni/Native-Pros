@@ -1,20 +1,102 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { TextInput } from "react-native-paper";
 import { height, width } from "./Page5";
-import { AntDesign, Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Page4 = () => {
-  const navigation = useNavigation();
+const Page4 = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
-  const handlePress = () => {
-    navigation.navigate("Mytabs");
+  const handlePress = async () => {
+    if (validateForm()) {
+      // Navigate to the next screen or perform sign-in action
+      navigation.navigate("Mytabs");
+
+      // storing email
+      try {
+        //  await AsyncStorage.setItem('email', email);
+        // console.log("Email stored successfully");
+        const data = {
+          email: email,
+          password: password,
+        }
+        const jsonData = JSON.stringify(data)
+        await AsyncStorage.setItem('data', jsonData)
+      } catch (error) {
+        console.error(error);
+      }
+
+      try {
+        const getData = await AsyncStorage.getItem('data')
+        if (getData!= null){
+          console.log(JSON.parse(getData));
+
+        }else{
+          console.log('No data');
+        }
+        // const getEmail = await AsyncStorage.getItem('email');
+        // console.log(getEmail);
+      } catch (error) {
+        console.error(error);
+      }
+      // AsyncStorage.setItem("email", email)
+      //    .then((result)=>{
+      //     console.log("Email stored successfully:", email);
+      //     // console.log(result);
+      //    })
+      //    .catch(()=>{
+      //     console.error('Error storing email:', error);
+      //    });
+    }
   };
 
-  const handlePress2 = () => {
-    navigation.navigate("Page3");
+  // const gettingData = async () => {
+  //   try {
+  //     const value = await AsyncStorage.getItem("email");
+  //     if (value!== null) {
+  //       console.log(value);
+  //     }
+  //   } catch (error) {
+  //     // Error retrieving data
+  //     console.log(error);
+  //   }
+  // }
+
+
+  const ValidEmail = (email) =>{
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+  const validateForm = () => {
+    let valid = true;
+    // Email validation
+    if (email.trim() === "" ) {
+      setEmailError("Email is required");
+      valid = false;
+    }
+    else if (!ValidEmail(email)){
+       setEmailError("Invalid Email");
+       valid = false;
+    }else {
+      setEmailError("");
+    }
+
+    // Password validation
+    if (password.trim() === "") {
+      setPasswordError("Password is required");
+      valid = false;
+    } else {
+      setPasswordError("");
+    }
+
+    return valid;
   };
+
   return (
     <>
       <View
@@ -28,7 +110,7 @@ const Page4 = () => {
         }}
       >
         <View style={styles.header}>
-          <TouchableOpacity onPress={handlePress2}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <AntDesign name="arrowleft" size={30} color="#E9AB17" />
           </TouchableOpacity>
           <Text style={{ color: "white", fontSize: 23, fontWeight: "bold" }}>
@@ -56,8 +138,14 @@ const Page4 = () => {
               underlineColor: "transparent",
             },
           }}
+          onChangeText={setEmail}
+          error={emailError !== ""}
           left={<TextInput.Icon icon={"email-outline"} color="grey" />}
         />
+        {emailError !== "" && (
+          <Text style={{ color: "red" }}>{emailError}</Text>
+        )}
+
         <Text
           style={{
             color: "white",
@@ -79,8 +167,13 @@ const Page4 = () => {
               background: "transparent",
             },
           }}
+          onChangeText={setPassword}
+          error={passwordError !== ""}
           left={<TextInput.Icon icon="lock-outline" color="grey" />}
         />
+        {passwordError !== "" && (
+          <Text style={{ color: "red" }}>{passwordError}</Text>
+        )}
 
         <Text
           style={{
@@ -136,11 +229,12 @@ const Page4 = () => {
             borderRadius: 5,
             borderColor: "grey",
             padding: 10,
+            marginTop: 10,
           }}
         >
           <AntDesign name="apple1" size={24} color="white" />
           <Text style={{ color: "white", fontSize: 16, fontWeight: "normal" }}>
-            Sign Up with apple
+            Sign In with Apple
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -155,6 +249,7 @@ const Page4 = () => {
             borderRadius: 5,
             padding: 10,
             borderColor: "grey",
+            marginTop: 10,
           }}
         >
           <Image
@@ -162,7 +257,7 @@ const Page4 = () => {
             style={{ height: 20, width: 20 }}
           />
           <Text style={{ color: "black", fontSize: 16, fontWeight: "normal" }}>
-            Sign Up with google
+            Sign In with Google
           </Text>
         </TouchableOpacity>
       </View>

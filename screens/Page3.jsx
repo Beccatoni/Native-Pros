@@ -8,8 +8,9 @@ const Page3 = () => {
   const navigation = useNavigation()
 
 const handlePress = ( ) => {
-  navigation.navigate('Page4')
+  navigation.navigate('Page5')
 }
+
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -34,7 +35,7 @@ const handlePress = ( ) => {
         <Pressable onPress={handlePress} style={styles.button}>
           <Text style={styles.buttonText}>Watch Movie</Text>
         </Pressable>
-        <Pressable onPress={handlePress} style={styles.signInButton}>
+        <Pressable onPress={() => navigation.navigate('Page4')} style={styles.signInButton}>
           <Text style={styles.signInText}>Sign In</Text>
         </Pressable>
       </View>

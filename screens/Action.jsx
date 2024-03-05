@@ -9,7 +9,7 @@ import YoutubePlayer from "react-native-youtube-iframe";
 
 const Action = ({ route, navigation }) => {
   const rout = route.params;
-  // console.log();
+  console.log(rout);
   const [popular, setPopular] = useState([]);
   // const [videotrailer, setvideotrailer] = useState([]);
   const [videoPlay, setVideoPlay] = useState(" ");
@@ -30,12 +30,12 @@ const Action = ({ route, navigation }) => {
   };
   const FetchVidApi = () => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${movie.id}/videos?language=en-US`,
+      `https://api.themoviedb.org/3/movie/${rout.id}/videos?language=en-US`,
       options
     )
       .then((response) => response.json())
       .then((response) => {
-        setvideotrailer(response.results[0].key);
+        setVideoPlay(response.results[0].key);
         console.log(response.results[0].key);
       })
       .catch((err) => console.error(err));
@@ -78,6 +78,7 @@ console.log(videoPlay)
           gap: 20,
         }}
       >
+        <View style={{justifyContent:"center"}}>
         <View>
           <Pressable
             style={{ gap: 10, flexDirection: "row", marginTop: 10 }}
@@ -96,16 +97,18 @@ console.log(videoPlay)
           onReady={handlePlayVideo}
           // onChangeState={onStateChange}
         />
-        {/* <Text style={{ color: "white", fontWeight: "bold", fontSize: 20 }}>
-          {movie.original_title}
-        </Text> */}
-        <Text style={{ color: "white", fontWeight: "normal", fontSize: 16 }}>
-          When the world is under attack from creatures hunt thier human prey...
+        <Text style={{ color: "white", fontWeight: "bold", fontSize: 20 }}>
+          {rout.original_title}
         </Text>
+        <Text style={{ color: "white", fontWeight: "normal", fontSize: 16 }}>
+          {rout.overview}
+        </Text>
+
+        </View>
         <View
           style={{
             justifyContent: "center",
-            gap: 30,
+            gap: 20,
             alignItems: "center",
             flexDirection: "row",
           }}

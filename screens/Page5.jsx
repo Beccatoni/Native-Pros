@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, View, TouchableOpacity, Dimensions, Image } from "react-native";
 import { TextInput } from "react-native-paper";
 import { AntDesign } from "@expo/vector-icons";
@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 export const width = Dimensions.get("window").width;
 export const height = Dimensions.get("window").height;
 
+// registration
 const styles = {
   container: {
     backgroundColor: "#26282C",
@@ -58,19 +59,67 @@ const styles = {
 const Page5 = ({ navigation }) => {
   // const navigation = useNavigation();
 
-  const handlePress = () => {
-    navigation.navigate("Mytabs");
-  };
+  // const handlePress = () => {
+  //   navigation.navigate("Page3");
+  // };
 
   const handlePress2 = () => {
-    navigation.navigate("Page5");
+    navigation.navigate("Page4");
   };
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
+
+  const ValidEmail = (email) =>{
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+  // validations
+  const validateForm = () => {
+    let valid = true;
+
+    if (email.length === 0 && email.trim() === "") {
+      setEmailError("Email is required😒");
+      valid = false;
+    }else if(!ValidEmail(email)){
+      setEmailError("Invalid Email😒");
+      valid = false;
+    }else {
+      setEmailError("");
+    }
+
+    // password
+  if (password.trim() === '' && password.length === 0){
+    setPasswordError('Password is required🤷‍♀️');
+    valid=false;
+  }else if(confirmPassword !== password){
+    setPasswordError('Passwords do not match🤷‍♀️');
+    valid=false;
+  } else {
+    setPasswordError('');
+    setConfirmPasswordError('');
+  }
+  return valid;
+
+  }
+
+  const submitHandler = () => {
+    if (validateForm()) {
+      console.log(email);
+      console.log(password);
+    }
+  }
+
+  
   return (
     <>
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={handlePress}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <AntDesign name="arrowleft" size={30} color="yellow" />
           </TouchableOpacity>
           <Text style={{ color: "white", fontSize: 23, fontWeight: "bold" }}>
@@ -95,9 +144,16 @@ const Page5 = ({ navigation }) => {
                 text: "white",
                 underlineColor: "transparent",
               },
+              
             }}
+            onChangeText={setEmail}
+            error={emailError}
             right={<TextInput.Icon icon={"email-outline"} color="#E9AB17" />}
           />
+          {emailError? (<Text style={{color:"red"}}>{emailError}</Text>): null}
+
+
+
           <TextInput
             label="Password"
             mode="flat"
@@ -110,8 +166,12 @@ const Page5 = ({ navigation }) => {
                 background: "transparent",
               },
             }}
+            onChangeText={setPassword}
+            error={passwordError}
+            activeOutlineColor="blue"
             right={<TextInput.Icon icon="lock-outline" color="#E9AB17" />}
           />
+          {passwordError ? (<Text style={{color:"red"}}>{passwordError}</Text>):null}
           <TextInput
             label="Confirm Password"
             mode="flat"
@@ -124,8 +184,11 @@ const Page5 = ({ navigation }) => {
                 background: "transparent",
               },
             }}
+            onChangeText={setConfirmPassword}
+            error={setConfirmPassword}
             right={<TextInput.Icon icon="lock-outline" color="#E9AB17" />}
           />
+          {confirmPasswordError?(<Text style={{}}>{confirmPasswordError}</Text>):null}
         </View>
 
         <View
