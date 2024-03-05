@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   FlatList,
   ScrollView,
   TouchableOpacity,
+  Pressable,
 } from "react-native";
 import { height, width } from "./Page5";
 import { Entypo } from "@expo/vector-icons";
@@ -14,21 +15,79 @@ import { useNavigation } from "@react-navigation/native";
 import Card from "../components/Card"; 
 import CardPopular from "../components/CardPopular";
 
-const Page7 = () => {
+export default function Page7()  {
+
+  const [movie, setMovie] = useState([]);
+  const [popular, setPopular] = useState([]);
+  const [topRated, setTopRated] = useState([])
+
   const navigation = useNavigation();
 
   // Sample list of cards
-  const cards = [
-    { id: "1", title: "8.8", image: require("../assets/raya.jpg") },
-    { id: "2", title: "9", image: require("../assets/theboy.jpg") },
-    { id: "3", title: "6", image: require("../assets/wonka.jpg") },
-  ];
+  // const cards = [
+  //   { id: "1", title: "8.8", image: require("../assets/raya.jpg") },
+  //   { id: "2", title: "9", image: require("../assets/theboy.jpg") },
+  //   { id: "3", title: "6", image: require("../assets/wonka.jpg") },
+  // ];
 
-  const cardsPopular = [
-    { id: "1", title: "8.8", image: require("../assets/raya.jpg") },
-    { id: "2", title: "9", image: require("../assets/theboy.jpg") },
-    { id: "3", title: "6", image: require("../assets/wonka.jpg") },
-  ];
+  // const cardsPopular = [
+  //   { id: "1", title: "8.8", image: require("../assets/paddington.jpg") },
+  //   { id: "2", title: "9", image: require("../assets/matilda.jpg") },
+  //   { id: "3", title: "6", image: require("../assets/wonka.jpg") },
+  // ];
+
+
+
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1Zjg4NmIzYjUyMmU0ODYxNWY0ZGMwMWU1YzQ3Y2YyZiIsInN1YiI6IjY1ZDg2YzU1MWJmODc2MDE2NGJlY2M4MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8d7YWsNnOta-nUkNxZYqXAG8MYcEOdvxht8x2a8YjRg'
+    }
+  };
+
+  const FetchApi = () => {
+    fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options)
+    .then(response => response.json())
+    .then((response) => {
+      setMovie(response.results)
+      // console.log(response)
+    }
+      )
+    .catch(err => console.error(err));
+  }
+  
+  
+
+  const FetchTopRated = () => {
+    fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
+  .then(response => response.json())
+  .then((response) => {
+    setTopRated(response.results)
+    // console.log(response)
+  })
+  .catch(err => console.error(err));
+  }
+
+  const FetchPopular = () => {
+    fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options)
+  .then(response => response.json())
+  .then((response) =>{
+    // console.log(response.results)
+    setPopular(response.results)
+  } )
+  .catch(err => console.error(err));
+  }
+
+
+
+
+  useEffect(() => {
+    FetchApi();
+    FetchPopular();
+    FetchTopRated();
+  }, [])
+
 
   return (
     <View
@@ -138,7 +197,7 @@ const Page7 = () => {
             <Text
               style={{
                 color: "white",
-                fontWeight: "normal ",
+                fontWeight: "normal",
                 textAlign: "center",
               }}
             >
@@ -178,10 +237,13 @@ const Page7 = () => {
         </View>
 
         <FlatList
-          data={cards}
+          data={movie}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <Card title={item.title} image={item.image} />
+            <Pressable onPress={()=>navigation.navigate('Action', item)}>
+              <Card title={item.vote_count} image={item.poster_path} />
+            </Pressable>
+            
           )}
           style={{ gap: 15 }}
           horizontal
@@ -201,10 +263,10 @@ const Page7 = () => {
             </Text>
           </View>
           <FlatList
-            data={cards}
+            data={topRated}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <Card title={item.title} image={item.image} />
+              <Card title={item.vote_average} image={item.poster_path} />
             )}
             style={{ gap: 15 }}
             horizontal
@@ -217,28 +279,29 @@ const Page7 = () => {
             <Text
               style={{ color: "white", fontWeight: "normal", fontSize: 20 }}
             >
-              Made for you
+              Popular Movies
             </Text>
             <Text style={{ color: "grey", fontWeight: "normal", fontSize: 16 }}>
               View More
             </Text>
           </View>
           <FlatList
-            data={cards}
+            data={popular}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <CardPopular title={item.title} image={item.image} />
+              <CardPopular title={item.vote_average} image={item.poster_path} />
             )}
             style={{ gap: 15 }}
             horizontal
           />
         </View>
       </ScrollView>
-      <View style={{height:40}}>
+      {/* <View style={{height:40}}>
             <Text onPress={navigation.navigate('Profile')} >Home</Text>
-        </View>
+        </View> */}
     </View>
   );
 };
 
-export default Page7;
+// export default Page7;
+

@@ -55,22 +55,22 @@ const styles = {
   },
 };
 
-const Page5 = () => {
-  const navigation = useNavigation();
+const Page5 = ({ navigation }) => {
+  // const navigation = useNavigation();
 
   const handlePress = () => {
-    navigation.navigate("Page4");
+    navigation.navigate("Mytabs");
   };
 
   const handlePress2 = () => {
-    navigation.navigate("Page6");
+    navigation.navigate("Page5");
   };
 
   return (
     <>
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={handlePress2}>
+          <TouchableOpacity onPress={handlePress}>
             <AntDesign name="arrowleft" size={30} color="yellow" />
           </TouchableOpacity>
           <Text style={{ color: "white", fontSize: 23, fontWeight: "bold" }}>
@@ -128,34 +128,84 @@ const Page5 = () => {
           />
         </View>
 
-        <View style={{ justifyContent: "space-between", alignItems: "center", gap: 12, marginTop: 20 }}>
-          <TouchableOpacity style={styles.signUpButton}>
+        <View
+          style={{
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: 12,
+            marginTop: 20,
+          }}
+        >
+          <TouchableOpacity style={styles.signUpButton} onPress={handlePress2}>
             <Text style={styles.signUpText}>Sign Up</Text>
           </TouchableOpacity>
 
           <Text style={styles.termsText}>
-            By signing up I accept <Text style={{ color: "#E9AB17" }}>terms of use</Text> and{" "}
-            <Text style={{ color: "#E9AB17", fontWeight: "normal" }}>privacy policy</Text>
+            By signing up I accept{" "}
+            <Text style={{ color: "#E9AB17" }}>terms of use</Text> and{" "}
+            <Text style={{ color: "#E9AB17", fontWeight: "normal" }}>
+              privacy policy
+            </Text>
           </Text>
           <Text style={{ color: "white", fontSize: 11, fontWeight: "normal" }}>
             or simply sign up with
           </Text>
-          <TouchableOpacity style={{ backgroundColor: "black", flexDirection:"row", gap:20, justifyContent:"center", alignItems:"center",  height: 50, width: 350, borderRadius: 5, padding: 10 }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "black",
+              flexDirection: "row",
+              gap: 20,
+              justifyContent: "center",
+              alignItems: "center",
+              height: 50,
+              width: 350,
+              borderRadius: 5,
+              padding: 10,
+            }}
+          >
             <AntDesign name="apple1" size={24} color="white" />
-            <Text style={{ color: "white", fontSize: 16, fontWeight: "normal",  }}>
+            <Text
+              style={{ color: "white", fontSize: 16, fontWeight: "normal" }}
+            >
               Sign Up with apple
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{ backgroundColor: "white", flexDirection:"row", gap:20, justifyContent:"center", alignItems:"center", height: 50, width: 350, borderRadius: 5, padding: 10 }}>
-          <Image source={require('../assets/GOOGLE.png')} style={{height:20, width:20}}/>
-            <Text style={{ color: "black", fontSize: 16, fontWeight: "normal" }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "white",
+              flexDirection: "row",
+              gap: 20,
+              justifyContent: "center",
+              alignItems: "center",
+              height: 50,
+              width: 350,
+              borderRadius: 5,
+              padding: 10,
+            }}
+          >
+            <Image
+              source={require("../assets/GOOGLE.png")}
+              style={{ height: 20, width: 20 }}
+            />
+            <Text
+              style={{ color: "black", fontSize: 16, fontWeight: "normal" }}
+            >
               Sign Up with google
             </Text>
           </TouchableOpacity>
-          <Text style={{ color: "white", fontSize: 18, fontWeight: "normal", marginTop: 20,  }}>
+          <Text
+            style={{
+              color: "white",
+              fontSize: 18,
+              fontWeight: "normal",
+              marginTop: 20,
+            }}
+          >
             Already have an account?
-            <TouchableOpacity onPress={handlePress}>
-              <Text style={{ color: "#E9AB17", fontWeight: "bold" }}>Sign In</Text>
+            <TouchableOpacity onPress={handlePress2}>
+              <Text style={{ color: "#E9AB17", fontWeight: "bold" }}>
+                Sign In
+              </Text>
             </TouchableOpacity>
           </Text>
         </View>

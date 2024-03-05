@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     gap:3
   },
   progressBarItemYellow: {
-    backgroundColor: "yellow",
+    backgroundColor: "#E9AB17",
     height: 10,
     width: 50,
     borderRadius: 10,
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   button: {
-    backgroundColor: "yellow",
+    backgroundColor: "#E9AB17",
     height: 50,
     width: 380,
     borderRadius: 8,
