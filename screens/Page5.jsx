@@ -1,8 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Text, View, TouchableOpacity, Dimensions, Image } from "react-native";
 import { TextInput } from "react-native-paper";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { Firebase_App, Firebase_Auth } from "../firebaseConfiguration";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
+import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { authenticate } from "./Page4";
+import { MyContext } from "../global/ContextApi";
+
+// const auth = initializeAuth(Firebase_App, {
+//   persistence: getReactNativePersistence(AsyncStorage)
+// });
+
+
 
 export const width = Dimensions.get("window").width;
 export const height = Dimensions.get("window").height;
@@ -57,11 +70,8 @@ const styles = {
 };
 
 const Page5 = ({ navigation }) => {
-  // const navigation = useNavigation();
-
-  // const handlePress = () => {
-  //   navigation.navigate("Page3");
-  // };
+  
+  const {darkMode, setDarkMode, DarkModeSet} = useContext(MyContext);
 
   const handlePress2 = () => {
     navigation.navigate("Page4");
@@ -73,6 +83,9 @@ const Page5 = ({ navigation }) => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  
 
   const ValidEmail = (email) =>{
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -89,6 +102,7 @@ const Page5 = ({ navigation }) => {
       setEmailError("Invalid Email😒");
       valid = false;
     }else {
+      
       setEmailError("");
     }
 
@@ -107,28 +121,38 @@ const Page5 = ({ navigation }) => {
 
   }
 
-  const submitHandler = () => {
+  const submitHandler = async() => {
+
     if (validateForm()) {
       console.log(email);
       console.log(password);
+      
+      try {
+      const user = await createUserWithEmailAndPassword(authenticate, email, password);
+      console.log(user);
+      } catch (error) {
+        console.error(error);
+      }
+      navigation.navigate('Page4')
+
     }
   }
 
   
   return (
     <>
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor:darkMode?"#26282C":"white"}]}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <AntDesign name="arrowleft" size={30} color="yellow" />
+            <AntDesign name="arrowleft" size={30} color="#E9AB17" />
           </TouchableOpacity>
-          <Text style={{ color: "white", fontSize: 23, fontWeight: "bold" }}>
+          <Text style={{ color:darkMode? "white":"black", fontSize: 23, fontWeight: "bold" }}>
             Register
           </Text>
         </View>
         <View style={styles.logoContainer}>
           <Image source={require("../assets/logo.jpg")} />
-          <Text style={styles.logo}>
+          <Text style={[styles.logo, {color:darkMode?'white':'black'}]}>
             Sign Up to discover all our movies and enjoy our features.
           </Text>
         </View>
@@ -137,11 +161,12 @@ const Page5 = ({ navigation }) => {
             label="Email"
             mode="flat"
             style={styles.input}
+            textColor={darkMode?"white":"black"}
             theme={{
               colors: {
                 primary: "white",
                 placeholder: "white",
-                text: "white",
+                text: darkMode?"white":"black",
                 underlineColor: "transparent",
               },
               
@@ -150,19 +175,20 @@ const Page5 = ({ navigation }) => {
             error={emailError}
             right={<TextInput.Icon icon={"email-outline"} color="#E9AB17" />}
           />
-          {emailError? (<Text style={{color:"red"}}>{emailError}</Text>): null}
+          {emailError? (<Text style={{color:darkMode?"white":"black" }}>{emailError}</Text>): null}
 
 
 
           <TextInput
             label="Password"
             mode="flat"
+            textColor={darkMode?"white":"black"}
             style={styles.input}
             theme={{
               colors: {
                 primary: "white",
                 placeholder: "white",
-                text: "white",
+                text:darkMode?"white":"black",
                 background: "transparent",
               },
             }}
@@ -175,12 +201,13 @@ const Page5 = ({ navigation }) => {
           <TextInput
             label="Confirm Password"
             mode="flat"
+            textColor={darkMode?"white":"black"}
             style={styles.input}
             theme={{
               colors: {
                 primary: "white",
                 placeholder: "white",
-                text: "white",
+                text: darkMode?"white":"black",
                 background: "transparent",
               },
             }}
@@ -188,7 +215,7 @@ const Page5 = ({ navigation }) => {
             error={setConfirmPassword}
             right={<TextInput.Icon icon="lock-outline" color="#E9AB17" />}
           />
-          {confirmPasswordError?(<Text style={{}}>{confirmPasswordError}</Text>):null}
+          {confirmPasswordError?(<Text style={{color:'red'}}>{confirmPasswordError}</Text>):null}
         </View>
 
         <View
@@ -199,18 +226,18 @@ const Page5 = ({ navigation }) => {
             marginTop: 20,
           }}
         >
-          <TouchableOpacity style={styles.signUpButton} onPress={handlePress2}>
+          <TouchableOpacity style={styles.signUpButton} onPress={submitHandler}>
             <Text style={styles.signUpText}>Sign Up</Text>
           </TouchableOpacity>
 
-          <Text style={styles.termsText}>
+          <Text style={[styles.termsText, {color:darkMode?"white":"black"}]}>
             By signing up I accept{" "}
             <Text style={{ color: "#E9AB17" }}>terms of use</Text> and{" "}
             <Text style={{ color: "#E9AB17", fontWeight: "normal" }}>
               privacy policy
             </Text>
           </Text>
-          <Text style={{ color: "white", fontSize: 11, fontWeight: "normal" }}>
+          <Text style={{ color:darkMode?"white":"black", fontSize: 11, fontWeight: "normal" }}>
             or simply sign up with
           </Text>
           <TouchableOpacity
@@ -228,14 +255,14 @@ const Page5 = ({ navigation }) => {
           >
             <AntDesign name="apple1" size={24} color="white" />
             <Text
-              style={{ color: "white", fontSize: 16, fontWeight: "normal" }}
+              style={{color:"white", fontSize: 16, fontWeight: "normal" }}
             >
               Sign Up with apple
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
-              backgroundColor: "white",
+              backgroundColor:darkMode?"white":"black",
               flexDirection: "row",
               gap: 20,
               justifyContent: "center",
@@ -251,14 +278,14 @@ const Page5 = ({ navigation }) => {
               style={{ height: 20, width: 20 }}
             />
             <Text
-              style={{ color: "black", fontSize: 16, fontWeight: "normal" }}
+              style={{ color:darkMode?"black":"white", fontSize: 16, fontWeight: "normal" }}
             >
               Sign Up with google
             </Text>
           </TouchableOpacity>
           <Text
             style={{
-              color: "white",
+              color:darkMode?"white":"black",
               fontSize: 18,
               fontWeight: "normal",
               marginTop: 20,

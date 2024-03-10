@@ -10,11 +10,14 @@ import Page7 from "./Page7";
 import Search from "./Search";
 import Profile from "./Profile";
 import Mylist from "./Mylist";
+import DrawerNav from "./Drawer";
+import { ContextApi } from "../global/ContextApi";
 
 const Tab = createBottomTabNavigator();
 
 export default function Mytabs() {
   return (
+    <ContextApi>
     <Tab.Navigator initialRouteName="Page7">
       <Tab.Screen
         name="Home"
@@ -50,7 +53,7 @@ export default function Mytabs() {
 
       <Tab.Screen
         name="Profile"
-        component={Profile}
+        component={DrawerNav}
         options={{
             headerShown: false,
             tabBarIcon: ({ size, color }) => (
@@ -67,6 +70,8 @@ export default function Mytabs() {
       
       
     </Tab.Navigator>
+    </ContextApi>
+
   );
 }
 

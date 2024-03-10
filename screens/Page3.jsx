@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Button, Text, View, Image, Pressable, StyleSheet, Dimensions } from "react-native";
 import {useNavigation} from '@react-navigation/native'
+import { MyContext } from "../global/ContextApi";
 
 const width = Dimensions.get('window').width;
 
 const Page3 = () => {
+  const {darkMode,setDarkMode, DarkModeSet} = useContext(MyContext);
+
   const navigation = useNavigation()
 
 const handlePress = ( ) => {
@@ -12,7 +15,7 @@ const handlePress = ( ) => {
 }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor:darkMode?"#26282C":'white'}]}>
       <View style={styles.logoContainer}>
       <Image source={require('../assets/logo.jpg')} />
       </View>
@@ -26,8 +29,8 @@ const handlePress = ( ) => {
       </View>
       
       <View style={styles.textContainer}>
-        <Text style={styles.headerText}>Welcome To MUVI</Text>
-        <Text style={styles.descriptionText}>
+        <Text style={[styles.headerText, {color:darkMode?'white':'black'} ]}>Welcome To MUVI</Text>
+        <Text style={[styles.descriptionText, {color:darkMode?'white':'black'}]}>
           Free movie streaming all your needs everytime and everywhere.
         </Text>
       </View>
@@ -36,14 +39,14 @@ const handlePress = ( ) => {
           <Text style={styles.buttonText}>Watch Movie</Text>
         </Pressable>
         <Pressable onPress={() => navigation.navigate('Page4')} style={styles.signInButton}>
-          <Text style={styles.signInText}>Sign In</Text>
+          <Text style={[styles.signInText, {color:darkMode?'white':'black'}]}>Sign In</Text>
         </Pressable>
       </View>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+ export const styles = StyleSheet.create({
   container: {
     backgroundColor:'#26282C',
     height: "100%",
@@ -75,13 +78,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   headerText: {
-    color: "white",
+    color:'white',
     fontWeight: "bold",
     fontSize: 30,
     marginBottom: 10,
   },
   descriptionText: {
-    color: "white",
+    color:'white',
     textAlign: "center",
     fontSize:17
   },
@@ -100,12 +103,12 @@ const styles = StyleSheet.create({
   buttonText: {
     paddingTop: 5,
   },
-  signInButton: {
+   signInButton: {
     justifyContent: "center",
     alignItems: "center",
   },
   signInText: {
-    color: "white",
+    color:'white',
   },
 });
 

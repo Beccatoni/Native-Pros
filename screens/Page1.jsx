@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Text,
   TextInput,
@@ -9,12 +9,16 @@ import {
   Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
+import { MyContext } from "../global/ContextApi";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 const Page1 = ({}) => {
+  const {darkMode,setDarkMode, DarkModeSet} = useContext(MyContext);
+  
   const navigation = useNavigation();
+
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate("Page2");
@@ -25,12 +29,12 @@ const Page1 = ({}) => {
       
         <View
           style={{
-            backgroundColor: "#26282C",
+            backgroundColor:darkMode?"#26282C":'white',
             width: "100%",
             height: "100%",
             justifyContent: "center",
-            alignItems: "center",
-          }}
+            alignItems: "center",}
+          }
         >
           <View>
             <Image source={require("../assets/logo.jpg")} style={{height:85, width:270}} />

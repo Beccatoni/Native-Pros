@@ -15,13 +15,13 @@ import { useNavigation } from "@react-navigation/native";
 import Card from "../components/Card"; 
 import CardPopular from "../components/CardPopular";
 
-export default function Page7()  {
+export default function Page7({navigation})  {
 
   const [movie, setMovie] = useState([]);
   const [popular, setPopular] = useState([]);
   const [topRated, setTopRated] = useState([])
 
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   // Sample list of cards
   // const cards = [
@@ -126,10 +126,10 @@ export default function Page7()  {
       <View style={{marginBottom:"3%", marginTop:"10%" }}>
         <ScrollView horizontal contentContainerStyle={{gap:50}} showsHorizontalScrollIndicator={false}>
           
-          <Text style={{ color: "#E9AB17", fontWeight: "normal" }}>Featured</Text>
-          <Text style={{ color: "white", fontWeight: "normal" }}>Series</Text>
-          <Text style={{ color: "white", fontWeight: "normal" }}>Films</Text>
-          <Text style={{ color: "white", fontWeight: "normal" }}>Origin</Text>
+          <Text style={{ color: "#E9AB17", fontWeight: "normal" }} onPress={()=> navigation.navigate('Page4')}>Featured</Text>
+          <Text style={{ color: "white", fontWeight: "normal" }} onPress={()=> navigation.navigate('Page5')}>Series</Text>
+          <Text style={{ color: "white", fontWeight: "normal" }} onPress={()=> navigation.navigate('Page2')}>Films</Text>
+          <Text style={{ color: "white", fontWeight: "normal" }} onPress={()=> navigation.navigate('Page1')}>Origin</Text>
         </ScrollView>
         <View style={{backgroundColor:"#E9AB17", height:5, width:50, borderRadius:2, marginBottom:"3%", marginTop:"4%", marginLeft:5}}></View>
       </View>

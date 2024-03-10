@@ -20,9 +20,14 @@ import Page5 from "./screens/Page5";
 import Page6 from "./screens/Page4";
 import Mytabs from "./screens/Mytabs";
 import Action from "./screens/Action";
+import Resetpass from "./screens/Resetpass";
+
+
+import { MyContext, ContextApi } from "./global/ContextApi";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  
   return (
     <>
       {/* <View style={styles.container}>
@@ -56,6 +61,7 @@ export default function App() {
     <Page4/>
 
 </View> */}
+<ContextApi>
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Page1"
@@ -69,8 +75,11 @@ export default function App() {
           <Stack.Screen name="Page6" component={Page6} />
           <Stack.Screen name="Mytabs" component={Mytabs} />
           <Stack.Screen name="Action" component={Action} />
+          <Stack.Screen name="Resetpass" component={Resetpass}/>
+          {/* <Stack.Screen name="Profile" component={DrawerNav} /> */}
         </Stack.Navigator>
       </NavigationContainer>
+      </ContextApi>
     </>
   );
 }

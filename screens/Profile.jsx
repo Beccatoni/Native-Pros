@@ -11,8 +11,18 @@ import { height, width } from "./Page5";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather, AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Firebase_Auth } from "../firebaseConfiguration";
 
 const Profile = ({ navigation }) => {
+  const LogOut = async () => {
+    try {
+      await Firebase_Auth.signOut();
+      navigation.navigate("Page4");
+      console.log('Signed out successfully')
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <>
       {/* <SafeAreaView> */}
@@ -66,7 +76,7 @@ const Profile = ({ navigation }) => {
           </Pressable>
           <Text style={{ color: "white" }}> Terms and Conditions</Text>
           <Text style={{ color: "white" }}>Privacy & Policy</Text>
-          <Pressable style={{borderWidth:1, borderColor:"black", width:'90%', height:35, borderRadius:5, marginBottom:20}}>
+          <Pressable onPress={LogOut} style={{borderWidth:1, borderColor:"black", width:'90%', height:35, borderRadius:5, marginBottom:20}}>
             <Text style={{ color: "red", textAlign:"center" }}>Log Out</Text>
           </Pressable>
         </View>

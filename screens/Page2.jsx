@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Text, View, Pressable, ImageBackground, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { width } from "./Page5";
+import { MyContext } from "../global/ContextApi";
 
 const Page2 = () => {
+  const {darkMode,setDarkMode, DarkModeSet} = useContext(MyContext);
+
   const navigation = useNavigation();
 
   const handlePress = () => {
