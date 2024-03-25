@@ -56,7 +56,7 @@ export default function Search({ navigation }) {
   return (
     <>
       <View
-        style={{ backgroundColor: "#26282C", height: height, width: width, paddingLeft:20 }}
+        style={{ backgroundColor: "#26282C", height: height, width: width, justifyContent:"flex-start",  }}
       >
         <View>
           <TextInput
@@ -68,10 +68,10 @@ export default function Search({ navigation }) {
                 primary: "white",
               },
             }}
-            style={{ backgroundColor: "black", color: "white", width: 400 }}
+            style={{ backgroundColor: "black", color: "white", width: width, height:90 }}
             right={<TextInput.Icon icon={"magnify"} color="#E9AB17" />}
           />
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{gap:10,  flexDirection:"row", backgroundColor:"black", }}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap:50, height:60, width:width, flexDirection:"row", backgroundColor:"black", justifyContent:"space-between", alignItems:"center" }}>
             <TouchableOpacity>
               <Text style={{ color: "white", fontWeight: "normal" }}>All Results</Text>
             </TouchableOpacity>

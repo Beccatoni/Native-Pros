@@ -12,6 +12,7 @@ import Profile from "./Profile";
 import Mylist from "./Mylist";
 import DrawerNav from "./Drawer";
 import { ContextApi } from "../global/ContextApi";
+import TopNav from "./TopNav";
 
 const Tab = createBottomTabNavigator();
 
@@ -21,7 +22,7 @@ export default function Mytabs() {
     <Tab.Navigator initialRouteName="Page7">
       <Tab.Screen
         name="Home"
-        component={Page7}
+        component={TopNav}
         options={{
           headerShown: false,
           tabBarIcon: ({ size }) => <AntDesign name="home" size={size} />,

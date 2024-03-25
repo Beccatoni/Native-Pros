@@ -42,7 +42,7 @@ const Page2 = () => {
 const styles = StyleSheet.create({
   container: {
     justifyContent: "space-between",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
     width: width,
     height: "100%",
   },

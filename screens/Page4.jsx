@@ -171,7 +171,7 @@ const Page4 = ({ navigation }) => {
         <TextInput
           placeholder="e.g johndoe@gmail.com"
           mode="outlined"
-          textColor="white"
+          textColor={darkMode?"white":"black"}
           style={{ backgroundColor: "transparent" }}
           theme={{
             colors: {
@@ -201,7 +201,7 @@ const Page4 = ({ navigation }) => {
         <TextInput
           placeholder="Your password"
           mode="outlined"
-          textColor="white"
+          textColor={darkMode?"white":"black"}
           style={{ backgroundColor: "transparent" }}
           theme={{
             colors: {

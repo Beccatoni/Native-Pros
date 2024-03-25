@@ -14,7 +14,7 @@ const DrawerNav = () => {
     <ContextApi>
     
         <Drawer.Navigator initialRouteName='Profile'>
-            <Drawer.Screen name='Profile' component={Profile} />
+            <Drawer.Screen name='Profile' component={Profile} options={{headerShown:false}} />
             <Drawer.Screen name='Search' component={Search} />
             <Drawer.Screen name='Home' component={Page7} />
             <Drawer.Screen name='Mylist' component={Mylist} />

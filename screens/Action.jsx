@@ -1,6 +1,6 @@
 import { View, Text, Image, Pressable, FlatList } from "react-native";
 import React, { useState, useEffect } from "react";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { height, width } from "./Page5";
 import { Feather } from "@expo/vector-icons";
 import CardPopular from "../components/CardPopular";
@@ -90,19 +90,23 @@ console.log(videoPlay)
             <Text style={{ color: "white", fontSize: 20 }}>Action</Text>
           </Pressable>
         </View>
+        <View>
         <YoutubePlayer
-          height={300}
+          height={400}
           // play={videotrailer}
           videoId={videoPlay}
           onReady={handlePlayVideo}
           // onChangeState={onStateChange}
         />
+        <FontAwesome name="whatsapp" size={24} color="#E9AB17" style={{alignSelf:"flex-end"}} />
         <Text style={{ color: "white", fontWeight: "bold", fontSize: 20 }}>
           {rout.original_title}
         </Text>
+
         <Text style={{ color: "white", fontWeight: "normal", fontSize: 16 }}>
           {rout.overview}
         </Text>
+        </View>
 
         </View>
         <View

@@ -5,13 +5,16 @@ import {
   SafeAreaView,
   Image,
   Pressable,
+  Switch
 } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { height, width } from "./Page5";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather, AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Firebase_Auth } from "../firebaseConfiguration";
+
+import { ContextApi, MyContext } from "../global/ContextApi";
 
 const Profile = ({ navigation }) => {
   const LogOut = async () => {
@@ -23,6 +26,8 @@ const Profile = ({ navigation }) => {
       console.log(error);
     }
   }
+
+  const {darkMode,DarkModeSet} = useContext(MyContext);
   return (
     <>
       {/* <SafeAreaView> */}
@@ -43,6 +48,12 @@ const Profile = ({ navigation }) => {
           >
             More
           </Text>
+          <Switch trackColor={{false: '#E9AB17', true: 'white'}}
+                  thumbColor={darkMode ? 'black' : 'white'}
+                  onPress={DarkModeSet()}
+                  value={darkMode}
+                  style={{alignSelf:"flex-end"}}
+            />
         </View>
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <Image
